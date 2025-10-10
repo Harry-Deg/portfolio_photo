@@ -21,13 +21,8 @@
 
     <section class="gallery">
       <h2>Galerie</h2>
-      <div class="grid">
-        <img src="photos/photo1.JPG" alt="Pepite">
-        <img src="photos/photo2.JPG" alt="Pepite">
-        <img src="photos/photo3.JPG" alt="Pepite">
-        <img src="photos/photo4.JPG" alt="Pepite">
-        <img src="photos/photo5.JPG" alt="Pepite">
-        <img src="photos/photo7.JPG" alt="Pepite">
+      <div class="grid" id="gallery-grid">
+        <!-- Les images seront insérées ici -->
       </div>
     </section>
   </main>
@@ -35,5 +30,18 @@
   <footer>
     <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
   </footer>
+
+  <script>
+    const gallery = document.getElementById('gallery-grid');
+
+    // Boucle de 1 à 9
+    for (let i = 1; i <= 9; i++) {
+      const img = document.createElement('img');
+      img.src = `photos/photo${i}.JPG`;
+      img.alt = `Photo ${i}`;
+      img.loading = 'lazy'; // optimisation du chargement
+      gallery.appendChild(img);
+    }
+  </script>
 </body>
 </html>
