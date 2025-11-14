@@ -1,108 +1,134 @@
 /* ===== Reset & base ===== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
   background: #0a0a0a;
   color: #f2f2f2;
   line-height: 1.6;
+  padding: 0 1rem;
 }
 
-/* ===== Header minimal ===== */
+/* ===== Header ===== */
 header {
   text-align: center;
-  padding: 40px 20px;
+  padding: 4rem 1rem 2rem;
   background: #0a0a0a;
 }
+
 header h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   letter-spacing: 2px;
   color: #fff;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
+
 header p {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   color: #bbb;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
+
 .btn {
   display: inline-block;
-  padding: 10px 18px;
+  padding: 0.75rem 1.25rem;
   background: #e50914;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
   transition: background 0.3s, transform 0.2s;
 }
+
 .btn:hover {
   background: #b00610;
   transform: scale(1.05);
 }
 
-/* ===== Sections ===== */
+/* ===== Layout & Sections ===== */
 main {
   max-width: 1200px;
   margin: auto;
-  padding: 40px 20px;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
 }
-section {
-  margin-bottom: 60px;
-}
+
 section h2 {
-  font-size: 1.6rem;
-  margin-bottom: 25px;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
   border-bottom: 1px solid #222;
-  padding-bottom: 8px;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-/* ===== Texte "À propos" ===== */
+/* ===== À propos ===== */
 .about p {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   color: #ccc;
   max-width: 800px;
   margin: auto;
   text-align: center;
   line-height: 1.8;
+  padding: 0 1rem;
 }
 
 /* ===== Galerie ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
 }
+
 .grid img {
   width: 100%;
   height: auto;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   object-fit: cover;
   transition: transform 0.4s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
+
 .grid img:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 25px rgba(229, 9, 20, 0.6); /* glow rouge */
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
 }
 
 /* ===== Contact ===== */
 .contact {
   text-align: center;
+  padding: 0 1rem;
 }
-.contact p, .contact a {
+
+.contact p,
+.contact a {
   font-size: 1.1rem;
   color: #bbb;
 }
+
 .contact a {
   color: #e50914;
   text-decoration: none;
   font-weight: 600;
 }
+
 .contact a:hover {
   text-decoration: underline;
   color: #ff1f1f;
@@ -111,9 +137,27 @@ section h2 {
 /* ===== Footer ===== */
 footer {
   text-align: center;
-  padding: 25px;
+  padding: 2rem 1rem;
   background: #0a0a0a;
   font-size: 0.9rem;
   color: #666;
   border-top: 1px solid #111;
+  margin-top: 2rem;
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 600px) {
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
+
+  .contact p,
+  .contact a {
+    font-size: 1rem;
+  }
+
+  .about p {
+    padding: 0;
+  }
 }
