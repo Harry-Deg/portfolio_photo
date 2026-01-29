@@ -1,163 +1,209 @@
-/* ===== Reset & base ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ===== Base / tokens ===== */
+:root {
+  --bg: #0a0a0a;
+  --text: #f2f2f2;
+  --muted: #bdbdbd;
+  --muted2: #8b8b8b;
+  --line: #1b1b1b;
+
+  --accent: #e50914;
+  --accent2: #b00610;
+
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  font-size: 100%;
+  /* Typo fluide : s’adapte à la largeur d’écran */
+  font-size: clamp(16px, 1.1vw, 18px);
 }
 
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  background: #0a0a0a;
-  color: #f2f2f2;
+  background: var(--bg);
+  color: var(--text);
   line-height: 1.6;
-  padding: 0 1rem;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+/* Conteneur */
+.container {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+/* Liens */
+a { color: inherit; }
 
 /* ===== Header ===== */
-header {
-  text-align: center;
-  padding: 4rem 1rem 2rem;
-  background: #0a0a0a;
+.site-header {
+  padding: clamp(2.25rem, 5vw, 4.5rem) 0 2rem;
+  border-bottom: 1px solid var(--line);
+  background: radial-gradient(1200px 500px at 50% 0%, rgba(229, 9, 20, 0.12), transparent 55%);
 }
 
-header h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #fff;
+.site-header h1 {
+  font-size: clamp(2.1rem, 4.2vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  line-height: 1.05;
 }
 
-header p {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #bbb;
-  margin-bottom: 1.5rem;
+.subtitle {
+  margin-top: 0.8rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--muted);
 }
 
+.cta {
+  margin-top: 1.6rem;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Boutons */
 .btn {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  background: #e50914;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+
+  background: var(--accent);
   color: #fff;
-  border-radius: 6px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s, transform 0.2s;
+  font-weight: 700;
+
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 8px 22px rgba(229, 9, 20, 0.18);
 }
 
 .btn:hover {
-  background: #b00610;
-  transform: scale(1.05);
+  background: var(--accent2);
+  transform: translateY(-1px);
 }
 
-/* ===== Layout & Sections ===== */
+.btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ===== Main layout ===== */
 main {
-  max-width: 1200px;
-  margin: auto;
-  padding: 3rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
+  padding: 2.5rem 0 3rem;
+  display: grid;
+  gap: clamp(2.2rem, 4vw, 3.2rem);
 }
 
-section h2 {
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  color: #fff;
-  font-weight: 600;
+/* Titres sections */
+h2 {
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  font-weight: 800;
   text-transform: uppercase;
-  border-bottom: 1px solid #222;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  letter-spacing: 0.06em;
 }
 
-/* ===== À propos ===== */
+.about {
+  padding: 1.4rem 0 0.5rem;
+}
+
 .about p {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: #ccc;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  line-height: 1.8;
-  padding: 0 1rem;
+  margin-top: 1rem;
+  max-width: 70ch;
+  color: #d2d2d2;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+}
+
+/* Section head (Galerie) */
+.section-head {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.hint {
+  color: var(--muted2);
+  font-size: 0.98rem;
 }
 
 /* ===== Galerie ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 0 1rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+/* Desktop: 3 colonnes, tablette: 2, mobile: 1 */
+.grid a {
+  grid-column: span 4;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #111;
+  transform: translateZ(0);
 }
 
 .grid img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
-  cursor: pointer;
+  height: 100%;
+  display: block;
   object-fit: cover;
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+
+  /* Rend les vignettes homogènes */
+  aspect-ratio: 4 / 5;
+
+  transition: transform 220ms ease, filter 220ms ease;
+  filter: contrast(1.02) saturate(1.02);
 }
 
-.grid img:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
-}
-
-/* ===== Contact ===== */
-.contact {
-  text-align: center;
-  padding: 0 1rem;
-}
-
-.contact p,
-.contact a {
-  font-size: 1.1rem;
-  color: #bbb;
-}
-
-.contact a {
-  color: #e50914;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.contact a:hover {
-  text-decoration: underline;
-  color: #ff1f1f;
+.grid a:hover img {
+  transform: scale(1.03);
+  filter: contrast(1.05) saturate(1.08);
 }
 
 /* ===== Footer ===== */
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: #0a0a0a;
-  font-size: 0.9rem;
-  color: #666;
-  border-top: 1px solid #111;
-  margin-top: 2rem;
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0 2rem;
+  color: #6f6f6f;
+  font-size: 0.95rem;
 }
 
-/* ===== Responsive Tweaks ===== */
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .grid a { grid-column: span 6; } /* 2 colonnes */
+}
+
 @media (max-width: 600px) {
+  /* Tu voulais une police plus grande sur mobile */
+  html { font-size: 18px; }
+
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .btn {
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
+    width: 100%;
+    padding: 0.95rem 1.2rem;
   }
 
-  .contact p,
-  .contact a {
-    font-size: 1rem;
-  }
-
-  .about p {
-    padding: 0;
-  }
+  .grid a { grid-column: span 12; } /* 1 colonne */
+  .grid img { aspect-ratio: 3 / 4; } /* un peu plus “portrait” sur mobile */
 }

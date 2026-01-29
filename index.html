@@ -1,46 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio – Harry DEGBEGNI</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header>
-    <h1>Harry DEGBEGNI</h1>
-    <p>Photographe amateur – Paysages & Portraits</p>
-    <a href="https://instagram.com/_look_up_hry" target="_blank" class="btn">📸 Instagram</a>
-    <a href="contact.html" class="btn">✉️ Contact</a>
+  <header class="site-header">
+    <div class="container">
+      <h1>Harry DEGBEGNI</h1>
+      <p class="subtitle">Photographe amateur – Paysages & Portraits</p>
+
+      <div class="cta">
+        <a href="https://instagram.com/_look_up_hry" target="_blank" rel="noopener" class="btn">
+          Instagram
+        </a>
+        <a href="contact.html" class="btn btn--ghost">
+          Contact
+        </a>
+      </div>
+    </div>
   </header>
 
-  <main>
+  <main class="container">
     <section class="about">
       <h2>À propos</h2>
-      <p>Passionné de photographie, je capture paysages, portraits et instants uniques. Ce site présente une sélection de mes clichés.</p>
+      <p>
+        Passionné de photographie, je capture paysages, portraits et instants uniques.
+        Ce site présente une sélection de mes clichés.
+      </p>
     </section>
 
     <section class="gallery">
-      <h2>Galerie</h2>
-      <div class="grid" id="gallery-grid">
-        <!-- Les images seront insérées ici -->
+      <div class="section-head">
+        <h2>Galerie</h2>
+        <p class="hint">Clique sur une photo pour l’ouvrir dans un nouvel onglet.</p>
       </div>
+
+      <div class="grid" id="gallery-grid"></div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
+    </div>
   </footer>
 
   <script>
-    const gallery = document.getElementById('gallery-grid');
+    const gallery = document.getElementById("gallery-grid");
 
-    // Boucle de 1 à 9
     for (let i = 1; i <= 12; i++) {
-      const img = document.createElement('img');
+      const a = document.createElement("a");
+      a.href = `photos/photo${i}.JPG`;
+      a.target = "_blank";
+      a.rel = "noopener";
+
+      const img = document.createElement("img");
       img.src = `photos/photo${i}.JPG`;
       img.alt = `Photo ${i}`;
-      img.loading = 'lazy'; // optimisation du chargement
-      gallery.appendChild(img);
+      img.loading = "lazy";
+
+      a.appendChild(img);
+      gallery.appendChild(a);
     }
   </script>
 </body>
