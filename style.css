@@ -239,3 +239,47 @@ section h2{
     aspect-ratio: 3 / 4; /* plus agréable sur mobile */
   }
 }
+
+/* ===== Gallery tabs (Voyage / Portrait) ===== */
+.gallery-tabs{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn{
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.18);
+  background: transparent;
+  color: #fff;
+  padding: .55rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.tab-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.28);
+}
+
+.tab-btn.is-active{
+  background: var(--accent);
+  border-color: transparent;
+  box-shadow: 0 10px 25px rgba(229,9,20,.18);
+}
+
+.tab-btn:focus-visible{
+  outline: 2px solid rgba(229, 9, 20, .8);
+  outline-offset: 3px;
+}
+
+/* Mobile: boutons full width */
+@media (max-width: 600px){
+  .gallery-tabs{ align-items: stretch; }
+  .tab-btn{ width: 100%; }
+}
