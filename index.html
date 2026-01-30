@@ -8,23 +8,15 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Harry DEGBEGNI</h1>
-      <p class="subtitle">Photographe amateur – Paysages & Portraits</p>
+  <header>
+    <h1>Harry DEGBEGNI</h1>
+    <p>Photographe amateur – Paysages & Portraits</p>
 
-      <div class="cta">
-        <a href="https://instagram.com/_look_up_hry" target="_blank" rel="noopener" class="btn">
-          Instagram
-        </a>
-        <a href="contact.html" class="btn btn--ghost">
-          Contact
-        </a>
-      </div>
-    </div>
+    <a href="https://instagram.com/_look_up_hry" target="_blank" rel="noopener" class="btn">Instagram</a>
+    <a href="contact.html" class="btn">Contact</a>
   </header>
 
-  <main class="container">
+  <main>
     <section class="about">
       <h2>À propos</h2>
       <p>
@@ -34,38 +26,81 @@
     </section>
 
     <section class="gallery">
-      <div class="section-head">
-        <h2>Galerie</h2>
-        <p class="hint">Clique sur une photo pour l’ouvrir dans un nouvel onglet.</p>
+      <h2>Galerie</h2>
+      <p class="hint">Clique sur une photo pour l’ouvrir dans un nouvel onglet.</p>
+
+      <!-- Boutons -->
+      <div class="gallery-tabs" role="tablist" aria-label="Catégories de galerie">
+        <button class="tab-btn is-active" type="button" role="tab" aria-selected="true" data-category="voyage">
+          Voyage
+        </button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-category="portrait">
+          Portrait
+        </button>
       </div>
 
+      <!-- Une seule grille, remplie dynamiquement -->
       <div class="grid" id="gallery-grid"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
-    </div>
+  <footer>
+    <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
   </footer>
 
   <script>
     const gallery = document.getElementById("gallery-grid");
+    const tabButtons = document.querySelectorAll(".tab-btn");
 
-    for (let i = 1; i <= 12; i++) {
-      const a = document.createElement("a");
-      a.href = `photos/photoVoyage${i}.JPG`;
-      a.target = "_blank";
-      a.rel = "noopener";
+    // Ajuste ici selon tes fichiers
+    // Voyage: photos/photoVoyage1.JPG ... photoVoyage12.JPG
+    // Portrait: photos/photoPortrait1.JPG ... photoPortrait12.JPG
+    const galleries = {
+      voyage: { prefix: "photos/photoVoyage", count: 13, ext: "JPG" },
+      portrait: { prefix: "photos/photoPortrait", count: 6, ext: "JPG" },
+    };
 
-      const img = document.createElement("img");
-      img.src = `photos/photoVoyage${i}.JPG`;
-      img.alt = `Photo ${i}`;
-      img.loading = "lazy";
+    function renderGallery(category) {
+      const config = galleries[category];
+      if (!config) return;
 
-      a.appendChild(img);
-      gallery.appendChild(a);
+      gallery.innerHTML = "";
+
+      for (let i = 1; i <= config.count; i++) {
+        const a = document.createElement("a");
+        a.href = `${config.prefix}${i}.${config.ext}`;
+        a.target = "_blank";
+        a.rel = "noopener";
+
+        const img = document.createElement("img");
+        img.src = `${config.prefix}${i}.${config.ext}`;
+        img.alt = `${category} ${i}`;
+        img.loading = "lazy";
+
+        a.appendChild(img);
+        gallery.appendChild(a);
+      }
     }
+
+    function setActiveTab(category) {
+      tabButtons.forEach((btn) => {
+        const isActive = btn.dataset.category === category;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const category = btn.dataset.category;
+        setActiveTab(category);
+        renderGallery(category);
+      });
+    });
+
+    // Initial
+    setActiveTab("voyage");
+    renderGallery("voyage");
   </script>
 </body>
 </html>
