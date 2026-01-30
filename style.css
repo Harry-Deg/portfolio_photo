@@ -283,3 +283,15 @@ section h2{
   .gallery-tabs{ align-items: stretch; }
   .tab-btn{ width: 100%; }
 }
+
+/* Espace entre boutons et galerie */
+.gallery-spacer {
+  height: 2.2rem;
+}
+
+/* Sur mobile, un peu plus respirant */
+@media (max-width: 600px) {
+  .gallery-spacer {
+    height: 2.8rem;
+  }
+}

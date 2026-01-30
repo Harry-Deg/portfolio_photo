@@ -10,13 +10,18 @@
 <body>
   <header>
     <h1>Harry DEGBEGNI</h1>
-    <p>Photographe amateur – Paysages & Portraits</p>
+    <p>Photographe amateur – Paysages, Portraits & Événementiel</p>
 
-    <a href="https://instagram.com/_look_up_hry" target="_blank" rel="noopener" class="btn">Instagram</a>
-    <a href="contact.html" class="btn">Contact</a>
+    <a href="https://instagram.com/_look_up_hry" target="_blank" rel="noopener" class="btn">
+      Instagram
+    </a>
+    <a href="contact.html" class="btn">
+      Contact
+    </a>
   </header>
 
   <main>
+    <!-- À propos -->
     <section class="about">
       <h2>À propos</h2>
       <p>
@@ -25,23 +30,23 @@
       </p>
     </section>
 
+    <!-- Galerie -->
     <section class="gallery">
       <h2>Galerie</h2>
       <p class="hint">Clique sur une photo pour l’ouvrir dans un nouvel onglet.</p>
 
-      <!-- Boutons -->
+      <!-- Boutons catégories -->
       <div class="gallery-tabs" role="tablist" aria-label="Catégories de galerie">
-        <button class="tab-btn is-active" type="button" role="tab" aria-selected="true" data-category="voyage">
-          Voyage
-        </button>
-        <button class="tab-btn" type="button" role="tab" aria-selected="false" data-category="portrait">
-          Portrait
-        </button>
+        <button class="tab-btn is-active" type="button" data-category="voyage">Voyage</button>
+        <button class="tab-btn" type="button" data-category="portrait">Portrait</button>
+        <button class="tab-btn" type="button" data-category="soiree">Soirée</button>
+        <button class="tab-btn" type="button" data-category="appart">Appart</button>
       </div>
 
-      <p>     </p>
+      <!-- ESPACE VISUEL après les boutons -->
+      <div class="gallery-spacer"></div>
 
-      <!-- Une seule grille, remplie dynamiquement -->
+      <!-- Grille -->
       <div class="grid" id="gallery-grid"></div>
     </section>
   </main>
@@ -50,16 +55,24 @@
     <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
   </footer>
 
+  <!-- SCRIPT -->
   <script>
     const gallery = document.getElementById("gallery-grid");
     const tabButtons = document.querySelectorAll(".tab-btn");
 
-    // Ajuste ici selon tes fichiers
-    // Voyage: photos/photoVoyage1.JPG ... photoVoyage12.JPG
-    // Portrait: photos/photoPortrait1.JPG ... photoPortrait12.JPG
+    /*
+      Convention de noms conseillée :
+      photos/photoVoyage1.JPG
+      photos/photoPortrait1.JPG
+      photos/photoSoiree1.JPG
+      photos/photoAppart1.JPG
+    */
+
     const galleries = {
-      voyage: { prefix: "photos/photoVoyage", count: 13, ext: "JPG" },
+      voyage:   { prefix: "photos/photoVoyage",  count: 14, ext: "JPG" },
       portrait: { prefix: "photos/photoPortrait", count: 6, ext: "JPG" },
+      soiree:   { prefix: "photos/photoSoiree",   count: 8, ext: "JPG" },
+      appart:   { prefix: "photos/photoAppart",   count: 7, ext: "JPG" }
     };
 
     function renderGallery(category) {
@@ -85,14 +98,14 @@
     }
 
     function setActiveTab(category) {
-      tabButtons.forEach((btn) => {
-        const isActive = btn.dataset.category === category;
-        btn.classList.toggle("is-active", isActive);
-        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      tabButtons.forEach(btn => {
+        const active = btn.dataset.category === category;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
       });
     }
 
-    tabButtons.forEach((btn) => {
+    tabButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         const category = btn.dataset.category;
         setActiveTab(category);
@@ -100,7 +113,7 @@
       });
     });
 
-    // Initial
+    // Initialisation
     setActiveTab("voyage");
     renderGallery("voyage");
   </script>
