@@ -33,7 +33,7 @@
     <!-- Galerie -->
     <section class="gallery">
       <h2>Galerie</h2>
-      <p class="hint">Clique sur une photo pour l’ouvrir dans un nouvel onglet.</p>
+      <p class="hint">Clique sur une photo pour l’agrandir.</p>
 
       <!-- Boutons catégories -->
       <div class="gallery-tabs" role="tablist" aria-label="Catégories de galerie">
@@ -55,45 +55,49 @@
     <p>&copy; 2025 Harry DEGBEGNI – Portfolio</p>
   </footer>
 
+  <!-- LIGHTBOX -->
+  <div id="lb" role="dialog" aria-modal="true" aria-label="Visionneuse photo" style="display:none">
+    <button id="lb-close" aria-label="Fermer">&#10005;</button>
+    <button id="lb-prev" aria-label="Photo précédente">&#8592;</button>
+    <button id="lb-next" aria-label="Photo suivante">&#8594;</button>
+    <img id="lb-img" src="" alt="" />
+    <span id="lb-counter"></span>
+  </div>
+
   <!-- SCRIPT -->
   <script>
     const gallery = document.getElementById("gallery-grid");
     const tabButtons = document.querySelectorAll(".tab-btn");
 
-    /*
-      Convention de noms conseillée :
-      photos/photoVoyage1.JPG
-      photos/photoPortrait1.JPG
-      photos/photoSoiree1.JPG
-      photos/photoAppart1.JPG
-    */
-
     const galleries = {
-      voyage:   { prefix: "photos/photoVoyage",  count: 14, ext: "JPG" },
-      portrait: { prefix: "photos/photoPortrait", count: 6, ext: "JPG" },
-      soiree:   { prefix: "photos/photoSoiree",   count: 10, ext: "JPG" },
-      appart:   { prefix: "photos/photoAppart",   count: 7, ext: "JPG" }
+      voyage:   { prefix: "photos/photoVoyage",  count: 14, ext: "webp" },
+      portrait: { prefix: "photos/photoPortrait", count: 6, ext: "webp" },
+      soiree:   { prefix: "photos/photoSoiree",   count: 10, ext: "webp" },
+      appart:   { prefix: "photos/photoAppart",   count: 7, ext: "webp" }
     };
+
+    /* ---- Galerie ---- */
+    let currentImages = [];
 
     function renderGallery(category) {
       const config = galleries[category];
       if (!config) return;
 
       gallery.innerHTML = "";
+      currentImages = [];
 
       for (let i = 1; i <= config.count; i++) {
-        const a = document.createElement("a");
-        a.href = `${config.prefix}${i}.${config.ext}`;
-        a.target = "_blank";
-        a.rel = "noopener";
+        const src = `${config.prefix}${i}.${config.ext}`;
+        currentImages.push(src);
 
         const img = document.createElement("img");
-        img.src = `${config.prefix}${i}.${config.ext}`;
+        img.src = src;
         img.alt = `${category} ${i}`;
         img.loading = "lazy";
+        img.dataset.index = i - 1;
+        img.addEventListener("click", () => openLightbox(i - 1));
 
-        a.appendChild(img);
-        gallery.appendChild(a);
+        gallery.appendChild(img);
       }
     }
 
@@ -113,7 +117,55 @@
       });
     });
 
-    // Initialisation
+    /* ---- Lightbox ---- */
+    const lb        = document.getElementById("lb");
+    const lbImg     = document.getElementById("lb-img");
+    const lbCounter = document.getElementById("lb-counter");
+    let lbIndex = 0;
+
+    function openLightbox(index) {
+      lbIndex = index;
+      lbImg.src = currentImages[lbIndex];
+      lbCounter.textContent = `${lbIndex + 1} / ${currentImages.length}`;
+      lb.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      lb.focus();
+    }
+
+    function closeLightbox() {
+      lb.style.display = "none";
+      lbImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    function lbNav(dir) {
+      lbIndex = (lbIndex + dir + currentImages.length) % currentImages.length;
+      lbImg.src = currentImages[lbIndex];
+      lbCounter.textContent = `${lbIndex + 1} / ${currentImages.length}`;
+    }
+
+    document.getElementById("lb-close").addEventListener("click", closeLightbox);
+    document.getElementById("lb-prev").addEventListener("click", () => lbNav(-1));
+    document.getElementById("lb-next").addEventListener("click", () => lbNav(1));
+
+    lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+
+    document.addEventListener("keydown", e => {
+      if (lb.style.display === "none") return;
+      if (e.key === "Escape")     closeLightbox();
+      if (e.key === "ArrowLeft")  lbNav(-1);
+      if (e.key === "ArrowRight") lbNav(1);
+    });
+
+    /* Swipe tactile */
+    let touchStartX = 0;
+    lb.addEventListener("touchstart", e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend",   e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+    });
+
+    /* Initialisation */
     setActiveTab("voyage");
     renderGallery("voyage");
   </script>

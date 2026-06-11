@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+**/.DS_Store
+._*
+
+# Photos originales (trop lourdes pour GitHub Pages)
+# Garder uniquement les .webp convertis
+photos/*.JPG
+photos/*.jpg
+photos/*.JPEG
+photos/*.jpeg
+photos/*.PNG
+photos/*.png
