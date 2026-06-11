@@ -1,0 +1,91 @@
+/* ============ TOPBAR (contact override) ============ */
+.topbar {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+/* ============ BODY ============ */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============ CONTACT LAYOUT ============ */
+.contact {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: clamp(60px, 12vw, 140px) 0;
+}
+.contact .grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(40px, 7vw, 90px);
+  align-items: end;
+  width: 100%;
+}
+.contact h1 {
+  font-family: var(--font-display), serif;
+  font-weight: 400;
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  line-height: .92;
+  letter-spacing: -.01em;
+}
+.contact h1 em { font-style: italic; color: var(--muted); }
+.intro {
+  max-width: 46ch;
+  margin-top: 44px;
+  color: var(--muted);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.75;
+}
+
+/* ============ CHANNELS ============ */
+.channels { display: flex; flex-direction: column; }
+.channel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  transition: padding-left .3s ease;
+}
+.channel:last-child { border-bottom: 1px solid var(--line); }
+.channel:hover { padding-left: 10px; }
+.channel .k { font-size: .66rem; text-transform: uppercase; letter-spacing: .2em; color: var(--faint); }
+.channel .v {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+.channel .v .arrow { font-family: var(--font-ui); font-size: 1rem; color: var(--accent); opacity: 0; transform: translateX(-6px); transition: all .3s ease; }
+.channel:hover .v .arrow { opacity: 1; transform: none; }
+
+/* ============ BACK LINK ============ */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  margin-top: 50px;
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--muted);
+  transition: color .25s ease;
+}
+.back:hover { color: var(--text); }
+.back .arrow { color: var(--accent); transition: transform .25s ease; }
+.back:hover .arrow { transform: translateX(-3px); }
+
+/* ============ FOOTER (contact override) ============ */
+.site-footer { padding: 30px 0; }
+.footer-base { margin-top: 0; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 820px) {
+  .contact .grid { grid-template-columns: 1fr; align-items: start; gap: 50px; }
+}
