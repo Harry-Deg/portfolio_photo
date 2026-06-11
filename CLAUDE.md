@@ -10,11 +10,11 @@ portfolio_photo/
 ├── index.html        # Page principale (galerie + tabs)
 ├── contact.html      # Page de contact
 ├── style.css         # Styles globaux (thème sombre, responsive)
-├── photos/           # Images WebP optimisées (source: JPG bruts de caméra)
-│   ├── photoVoyage1.webp   … photoVoyage14.webp
-│   ├── photoPortrait1.webp … photoPortrait6.webp
-│   ├── photoSoiree1.webp   … photoSoiree10.webp
-│   └── photoAppart1.webp   … photoAppart7.webp
+├── photos/
+│   ├── voyage/       # photoVoyage1.webp … photoVoyage14.webp
+│   ├── portrait/     # photoPortrait1.webp … photoPortrait6.webp
+│   ├── soiree/       # photoSoiree1.webp … photoSoiree10.webp
+│   └── appart/       # photoAppart1.webp … photoAppart7.webp
 └── CLAUDE.md
 ```
 
@@ -36,13 +36,13 @@ Les 4 catégories sont définies dans l'objet `galleries` dans `index.html` :
 
 | Clé       | Préfixe fichier          | Nb photos |
 |-----------|--------------------------|-----------|
-| voyage    | photos/photoVoyage       | 14        |
-| portrait  | photos/photoPortrait     | 6         |
-| soiree    | photos/photoSoiree       | 10        |
-| appart    | photos/photoAppart       | 7         |
+| voyage    | photos/voyage/photoVoyage     | 14        |
+| portrait  | photos/portrait/photoPortrait | 6         |
+| soiree    | photos/soiree/photoSoiree     | 10        |
+| appart    | photos/appart/photoAppart     | 7         |
 
-Pour **ajouter une photo** : déposer le fichier `photoVoyage15.webp` et incrémenter `count` dans `galleries`.
-Pour **ajouter une catégorie** : ajouter une entrée dans `galleries` + un bouton `.tab-btn` dans le HTML.
+Pour **ajouter une photo** : déposer le fichier dans `photos/voyage/photoVoyage15.webp` et incrémenter `count` dans `galleries`.
+Pour **ajouter une catégorie** : créer `photos/<theme>/`, ajouter une entrée dans `galleries` + un bouton `.tab-btn` dans le HTML.
 
 ### Lightbox
 - Implémentation custom, sans dépendance externe.

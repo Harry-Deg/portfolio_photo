@@ -4,10 +4,10 @@
 ._*
 
 # Photos originales (trop lourdes pour GitHub Pages)
-# Garder uniquement les .webp convertis
-photos/*.JPG
-photos/*.jpg
-photos/*.JPEG
-photos/*.jpeg
-photos/*.PNG
-photos/*.png
+# Garder uniquement les .webp convertis dans photos/{theme}/
+photos/**/*.JPG
+photos/**/*.jpg
+photos/**/*.JPEG
+photos/**/*.jpeg
+photos/**/*.PNG
+photos/**/*.png
