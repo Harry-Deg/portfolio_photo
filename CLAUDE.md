@@ -36,12 +36,14 @@ portfolio_photo/
 ### Catégories de galerie
 Définies dans `js/gallery.js` dans le tableau `SETS` :
 
-| `cat`     | `label`    | Nb photos |
-|-----------|------------|-----------|
-| soiree    | Soirée     | 10        |
-| voyage    | Voyage     | 14        |
-| portrait  | Portrait   | 6         |
-| appart    | Intérieur  | 7         |
+| `cat`         | `label`       | Nb photos |
+|---------------|---------------|-----------|
+| fiancaille    | Fiançailles   | 15        |
+| celebrations  | Célébrations  | 11        |
+| soiree        | Soirée        | 14        |
+| appart        | Intérieur     | 17        |
+| voyage        | Voyage        | 19        |
+| portrait      | Portrait      | 6         |
 
 Pour **ajouter une photo** : déposer `img/voyage/15.webp` et incrémenter `ratios` dans `SETS`.
 Pour **ajouter une catégorie** : créer `img/<cat>/`, ajouter une entrée dans `SETS`.

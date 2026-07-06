@@ -2,10 +2,12 @@
 const RP = 1600/2400, RL = 2400/1600;
 
 const SETS = [
-  { cat: 'soiree',   label: 'Soirée',    ratios: [RP,RL,RP,RL,RL,RP,RP,RL,RL,RL] },
-  { cat: 'voyage',   label: 'Voyage',    ratios: [RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP] },
-  { cat: 'portrait', label: 'Portrait',  ratios: [RP,RP,RP,RL,RL,RP] },
-  { cat: 'appart',   label: 'Intérieur', ratios: [RL,RL,RP,RL,RL,RL,RL] },
+  { cat: 'fiancaille',   label: 'Fiançailles',   ratios: [RP,RP,RL,RL,RP,RP,RP,RP,RL,RL,RP,RL,RL,RP,RL] },
+  { cat: 'celebrations', label: 'Célébrations',  ratios: [RP,RL,RL,RL,RL,RP,RP,RP,RL,RL,RL] },
+  { cat: 'soiree',       label: 'Soirée',        ratios: [RP,RL,RP,RL,RL,RP,RP,RL,RL,RL,RL,RL,RL,RP] },
+  { cat: 'appart',       label: 'Intérieur',     ratios: [RL,RL,RP,RL,RL,RL,RL,RL,RL,RP,RP,RL,RP,RL,RL,RP,RL] },
+  { cat: 'voyage',       label: 'Voyage',        ratios: [RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RP,RL,RP,RP,RP,RL] },
+  { cat: 'portrait',     label: 'Portrait',      ratios: [RP,RP,RP,RL,RL,RP] },
 ];
 const LABELS = Object.fromEntries(SETS.map(s => [s.cat, s.label]));
 
@@ -35,7 +37,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 
 /* =================== GALLERY ENGINE =================== */
 const gallery = document.getElementById('gallery');
-let current = 'soiree';
+let current = 'fiancaille';
 let figures = [];
 let visibleData = [];
 let io;
